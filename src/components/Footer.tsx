@@ -9,18 +9,18 @@ export default function Footer() {
           <div className="text-lg font-bold text-primary mb-4 uppercase tracking-tighter">
             AlphaPredicts
           </div>
-          <p className="text-slate-500 mb-6">
+          <p className="text-slate-400 mb-6">
             High-stakes logic for the sovereign analyst. Deciphering the world
             through the lens of probability.
           </p>
           <div className="flex space-x-4">
-            <span className="material-symbols-outlined text-slate-500 cursor-pointer hover:text-tertiary transition-colors">
+            <span className="material-symbols-outlined text-slate-400 cursor-pointer hover:text-tertiary transition-colors">
               terminal
             </span>
-            <span className="material-symbols-outlined text-slate-500 cursor-pointer hover:text-tertiary transition-colors">
+            <span className="material-symbols-outlined text-slate-400 cursor-pointer hover:text-tertiary transition-colors">
               rss_feed
             </span>
-            <span className="material-symbols-outlined text-slate-500 cursor-pointer hover:text-tertiary transition-colors">
+            <span className="material-symbols-outlined text-slate-400 cursor-pointer hover:text-tertiary transition-colors">
               share
             </span>
           </div>
@@ -32,7 +32,7 @@ export default function Footer() {
           <ul className="space-y-4">
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="/analysis"
               >
                 Market Directory
@@ -40,7 +40,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="/signals"
               >
                 Signal Archive
@@ -48,7 +48,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="/analysis"
               >
                 Editorial Board
@@ -56,7 +56,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="#"
               >
                 API Documentation
@@ -71,7 +71,7 @@ export default function Footer() {
           <ul className="space-y-4">
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="/community"
               >
                 Forums
@@ -79,7 +79,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="/community"
               >
                 Member Directory
@@ -87,7 +87,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="/community"
               >
                 Events
@@ -95,7 +95,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="/support"
               >
                 Support
@@ -110,7 +110,7 @@ export default function Footer() {
           <ul className="space-y-4">
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="#"
               >
                 Privacy Policy
@@ -118,7 +118,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="#"
               >
                 Risk Disclosure
@@ -126,7 +126,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                className="text-slate-500 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
                 href="#"
               >
                 Terms of Service
@@ -138,7 +138,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="px-12 py-8 border-t border-[#16243d] text-center text-xs text-slate-500">
+      <div className="px-12 py-8 border-t border-[#16243d] text-center text-xs text-slate-400">
         &copy; {new Date().getFullYear()} AlphaPredicts. High-stakes logic for
         the sovereign analyst. All rights reserved. Financial data is for
         informational purposes only.

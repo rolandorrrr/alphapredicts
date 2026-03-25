@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import JsonLd, { faqSchema } from "@/components/JsonLd";
 
 export const metadata: Metadata = { title: "Pro", description: "Alpha Pro subscription — institutional intelligence for prediction market analysts." };
 
 export default function ProPage() {
   return (
     <div className="pt-24">
+      <JsonLd data={faqSchema} />
       {/* Hero */}
       <section className="relative px-6 py-20 max-w-[1440px] mx-auto overflow-hidden">
         <div className="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-20 pointer-events-none">

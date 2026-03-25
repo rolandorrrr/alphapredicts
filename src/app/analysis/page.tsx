@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import JsonLd, { articleSchema } from "@/components/JsonLd";
 
 export const metadata: Metadata = { title: "Analysis", description: "Live analysis feed with deep dives into prediction markets, politics, finance, and pop culture." };
 
 export default function AnalysisPage() {
   return (
     <div className="pt-24 pb-12 max-w-[1440px] mx-auto px-6">
+      <JsonLd data={articleSchema({ title: "The Fed's Shadow Pivot: Quantitative Analysis of Q4 Liquidity", description: "Deep dive into internal ledger movements suggesting a structural shift in overnight lending facilities.", author: "Dr. Elias Vance", datePublished: "2024-09-15" })} />
       <div className="flex items-center gap-3 mb-8">
         <div className="w-2 h-2 rounded-full bg-secondary-container animate-pulse shadow-[0_0_8px_#00c705]" />
         <h1 className="text-xs font-black uppercase tracking-[0.3em] text-on-surface-variant">Live Analysis Feed // Terminal v4.2</h1>

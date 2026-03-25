@@ -42,6 +42,7 @@ export default function CookieConsent() {
 
   const save = (p: CookiePreferences) => {
     localStorage.setItem("cookie-consent", JSON.stringify(p));
+    window.dispatchEvent(new CustomEvent("cookie-consent-updated"));
     setVisible(false);
   };
 

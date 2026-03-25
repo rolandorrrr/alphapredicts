@@ -149,7 +149,7 @@ export default function HomePage() {
                   <span className="text-[10px] font-black bg-primary-container px-2 py-0.5 text-primary uppercase">Deep Dive</span>
                   <span className="text-[10px] font-bold text-on-surface-variant uppercase">By Roberto</span>
                 </div>
-                <h4 className="text-2xl font-black uppercase leading-tight mb-4 hover:text-primary transition-colors cursor-pointer">The Asymmetry of Hedging: Why Every Predictor Needs a &quot;Nuclear Option&quot;</h4>
+                <h3 className="text-2xl font-black uppercase leading-tight mb-4 hover:text-primary transition-colors cursor-pointer">The Asymmetry of Hedging: Why Every Predictor Needs a &quot;Nuclear Option&quot;</h3>
                 <p className="text-on-surface-variant text-sm leading-relaxed">Roberto breaks down the tactical advantage of opposing consensus when the implied volatility of prediction markets exceeds real-world risk metrics.</p>
               </div>
             </div>
@@ -162,16 +162,16 @@ export default function HomePage() {
                   <span className="text-[10px] font-black bg-primary-container px-2 py-0.5 text-primary uppercase">Technicals</span>
                   <span className="text-[10px] font-bold text-on-surface-variant uppercase">By Rolando</span>
                 </div>
-                <h4 className="text-2xl font-black uppercase leading-tight mb-4 hover:text-primary transition-colors cursor-pointer">Decoding the Polygon Whale: Tracking the $2M Polymarket Position</h4>
+                <h3 className="text-2xl font-black uppercase leading-tight mb-4 hover:text-primary transition-colors cursor-pointer">Decoding the Polygon Whale: Tracking the $2M Polymarket Position</h3>
                 <p className="text-on-surface-variant text-sm leading-relaxed">Rolando uses on-chain forensic data to identify the source of the recent massive influx of liquidity.</p>
               </div>
             </div>
             <div className="space-y-8">
-              <h5 className="text-xs font-black uppercase tracking-[0.2em] border-b border-outline-variant pb-4">Latest Insights</h5>
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] border-b border-outline-variant pb-4">Latest Insights</h3>
               <div className="space-y-6">
-                <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">08:42 AM</span><h6 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">Poll Traps: Why Polymarket is beating FiveThirtyEight</h6></div>
-                <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">06:15 AM</span><h6 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">The Entertainment Gap: Betting on the Oscars vs the FED</h6></div>
-                <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">Yesterday</span><h6 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">Macro Signal: The yield curve inversion and your positions</h6></div>
+                <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">08:42 AM</span><h4 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">Poll Traps: Why Polymarket is beating FiveThirtyEight</h4></div>
+                <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">06:15 AM</span><h4 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">The Entertainment Gap: Betting on the Oscars vs the FED</h4></div>
+                <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">Yesterday</span><h4 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">Macro Signal: The yield curve inversion and your positions</h4></div>
               </div>
               <button className="w-full py-4 border border-outline-variant text-xs font-black uppercase tracking-widest hover:bg-surface-container-highest transition-all">View Archive</button>
             </div>
@@ -230,7 +230,7 @@ export default function HomePage() {
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-background to-transparent">
               <span className="text-[10px] font-black uppercase tracking-widest text-secondary mb-2 block">New Episode</span>
-              <h4 className="text-2xl font-black uppercase leading-tight">The Prediction Paradox: Season 3 Premiere</h4>
+              <h3 className="text-2xl font-black uppercase leading-tight">The Prediction Paradox: Season 3 Premiere</h3>
             </div>
           </div>
           <div className="space-y-4">

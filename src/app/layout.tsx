@@ -4,6 +4,8 @@ import "./globals.css";
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import AnalyticsProvider from "@/components/AnalyticsProvider";
+import JsonLd, { organizationSchema, websiteSchema } from "@/components/JsonLd";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -68,6 +70,9 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieConsent />
+        <AnalyticsProvider />
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
       </body>
     </html>
   );
