@@ -33,17 +33,28 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      // Create profile if it doesn't exist
+      // Create profile using service role key to bypass RLS
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        const { data: existing } = await supabase
+        const adminSupabase = createServerClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY!,
+          {
+            cookies: {
+              getAll: () => [],
+              setAll: () => {},
+            },
+          }
+        );
+
+        const { data: existing } = await adminSupabase
           .from("profiles")
           .select("id")
           .eq("id", user.id)
           .single();
 
         if (!existing) {
-          await supabase.from("profiles").insert({
+          await adminSupabase.from("profiles").insert({
             id: user.id,
             username: user.email?.split("@")[0] ?? `user_${user.id.slice(0, 8)}`,
             display_name: user.user_metadata?.full_name ?? user.email?.split("@")[0] ?? "Analyst",

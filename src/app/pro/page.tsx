@@ -5,18 +5,14 @@ import Link from "next/link";
 
 export const metadata: Metadata = { title: "Pro", description: "Alpha Pro subscription — institutional intelligence for prediction market analysts." };
 
-export default function ProPage({
+export default async function ProPage({
   searchParams,
 }: {
   searchParams: Promise<{ success?: string; canceled?: string }>;
 }) {
-  return <ProPageInner searchParamsPromise={searchParams} />;
-}
-
-async function ProPageInner({ searchParamsPromise }: { searchParamsPromise: Promise<{ success?: string; canceled?: string }> }) {
-  const params = await searchParamsPromise;
-  const success = params.success === "true";
-  const canceled = params.canceled === "true";
+  const params = await searchParams;
+  const success = params?.success === "true";
+  const canceled = params?.canceled === "true";
 
   return (
     <div className="pt-24">
