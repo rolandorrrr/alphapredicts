@@ -1,4 +1,5 @@
 import GlassPanel from "@/components/GlassPanel";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -53,8 +54,8 @@ export default function HomePage() {
               New data from Kalshi indicates a massive shift in probability for the Q4 rate trajectory. Roberto explores how whale movements are front-running the Fed&apos;s next signal.
             </p>
             <div className="flex items-center space-x-4">
-              <button className="px-8 py-3 bg-primary text-on-primary font-bold rounded-sm hover:brightness-110 transition-all uppercase tracking-tight">Full Analysis</button>
-              <button className="px-8 py-3 border border-outline-variant text-on-surface font-bold rounded-sm hover:bg-surface-container-high transition-all uppercase tracking-tight">View Market</button>
+              <Link href="/analysis" className="px-8 py-3 bg-primary text-on-primary font-bold rounded-sm hover:brightness-110 transition-all uppercase tracking-tight">Full Analysis</Link>
+              <Link href="/signals" className="px-8 py-3 border border-outline-variant text-on-surface font-bold rounded-sm hover:bg-surface-container-high transition-all uppercase tracking-tight">View Market</Link>
             </div>
           </div>
           <div className="lg:col-span-4 hidden lg:block">
@@ -173,7 +174,7 @@ export default function HomePage() {
                 <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">06:15 AM</span><h4 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">The Entertainment Gap: Betting on the Oscars vs the FED</h4></div>
                 <div className="group cursor-pointer"><span className="text-[10px] font-bold text-tertiary block mb-1">Yesterday</span><h4 className="text-sm font-bold uppercase group-hover:text-primary transition-colors">Macro Signal: The yield curve inversion and your positions</h4></div>
               </div>
-              <button className="w-full py-4 border border-outline-variant text-xs font-black uppercase tracking-widest hover:bg-surface-container-highest transition-all">View Archive</button>
+              <Link href="/analysis" className="block w-full py-4 border border-outline-variant text-xs font-black uppercase tracking-widest hover:bg-surface-container-highest transition-all text-center">View Archive</Link>
             </div>
           </div>
         </div>
@@ -191,7 +192,7 @@ export default function HomePage() {
                 <li key={f} className="flex items-center space-x-3"><span className="material-symbols-outlined font-black">check_circle</span><span className="font-bold">{f}</span></li>
               ))}
             </ul>
-            <button className="px-10 py-4 bg-on-tertiary-fixed text-tertiary font-black uppercase tracking-widest hover:scale-105 transition-transform rounded-sm">Join Alpha Pro — $49/mo</button>
+            <Link href="/pro" className="px-10 py-4 bg-on-tertiary-fixed text-tertiary font-black uppercase tracking-widest hover:scale-105 transition-transform rounded-sm inline-block">Join Alpha Pro — $49/mo</Link>
           </div>
           <div className="hidden lg:block relative">
             <div className="bg-surface-container-lowest p-8 border border-white/10 rounded-sm shadow-2xl scale-110">

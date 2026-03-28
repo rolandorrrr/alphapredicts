@@ -1,12 +1,39 @@
 import type { Metadata } from "next";
 import JsonLd, { faqSchema } from "@/components/JsonLd";
+import CheckoutButton from "./CheckoutButton";
+import Link from "next/link";
 
 export const metadata: Metadata = { title: "Pro", description: "Alpha Pro subscription — institutional intelligence for prediction market analysts." };
 
-export default function ProPage() {
+export default function ProPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ success?: string; canceled?: string }>;
+}) {
+  return <ProPageInner searchParamsPromise={searchParams} />;
+}
+
+async function ProPageInner({ searchParamsPromise }: { searchParamsPromise: Promise<{ success?: string; canceled?: string }> }) {
+  const params = await searchParamsPromise;
+  const success = params.success === "true";
+  const canceled = params.canceled === "true";
+
   return (
     <div className="pt-24">
       <JsonLd data={faqSchema} />
+
+      {/* Success / Cancel banners */}
+      {success && (
+        <div className="bg-secondary/10 border-b border-secondary/30 text-secondary px-6 py-4 text-center font-bold uppercase tracking-widest text-sm">
+          Welcome to Alpha Pro. Your subscription is now active.
+        </div>
+      )}
+      {canceled && (
+        <div className="bg-error/10 border-b border-error/30 text-error px-6 py-4 text-center font-bold uppercase tracking-widest text-sm">
+          Checkout was canceled. You can try again anytime.
+        </div>
+      )}
+
       {/* Hero */}
       <section className="relative px-6 py-20 max-w-[1440px] mx-auto overflow-hidden">
         <div className="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-20 pointer-events-none">
@@ -37,7 +64,12 @@ export default function ProPage() {
               </div>
             </div>
             <p className="text-on-surface-variant mb-12 max-w-xs">Full access to real-time signals and the core Alpha dashboard for agility.</p>
-            <button className="w-full py-4 border border-outline-variant hover:bg-surface-container-highest transition-colors font-bold uppercase tracking-widest text-sm">Deploy Monthly</button>
+            <CheckoutButton
+              tier="tactical"
+              className="w-full py-4 border border-outline-variant hover:bg-surface-container-highest transition-colors font-bold uppercase tracking-widest text-sm"
+            >
+              Deploy Monthly
+            </CheckoutButton>
           </div>
           <div className="bg-surface-container-highest p-12 border-l-4 border-tertiary relative overflow-hidden group">
             <div className="absolute -right-12 -top-12 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
@@ -51,7 +83,12 @@ export default function ProPage() {
               </div>
             </div>
             <p className="text-on-surface-variant mb-12 max-w-xs">The full suite including API hooks, private mentorship, and priority execution.</p>
-            <button className="w-full py-4 premium-gradient text-on-tertiary-fixed font-black uppercase tracking-widest text-sm active:scale-[0.98] transition-all">Claim Annual Alpha</button>
+            <CheckoutButton
+              tier="sovereign"
+              className="w-full py-4 premium-gradient text-on-tertiary-fixed font-black uppercase tracking-widest text-sm active:scale-[0.98] transition-all"
+            >
+              Claim Annual Alpha
+            </CheckoutButton>
           </div>
         </div>
       </section>
@@ -110,8 +147,15 @@ export default function ProPage() {
           <h2 className="text-5xl font-black uppercase italic tracking-tighter">Ascend to Alpha.</h2>
           <p className="font-bold text-lg uppercase tracking-wide opacity-80">Institutional intelligence for the sovereign individual.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <button className="bg-on-tertiary text-tertiary px-10 py-5 font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform">Get Started Now</button>
-            <button className="border-2 border-on-tertiary/20 px-10 py-5 font-black uppercase tracking-widest text-sm hover:bg-on-tertiary/10 transition-colors">Compare Tiers</button>
+            <CheckoutButton
+              tier="tactical"
+              className="bg-on-tertiary text-tertiary px-10 py-5 font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform"
+            >
+              Get Started Now
+            </CheckoutButton>
+            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 300, behavior: "smooth" }); }} className="border-2 border-on-tertiary/20 px-10 py-5 font-black uppercase tracking-widest text-sm hover:bg-on-tertiary/10 transition-colors inline-flex items-center justify-center">
+              Compare Tiers
+            </a>
           </div>
         </div>
       </section>

@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 const navLinks = [
   { href: "/", label: "Markets" },
@@ -14,7 +16,24 @@ const navLinks = [
 
 export default function TopNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
 
   return (
     <header
@@ -61,24 +80,44 @@ export default function TopNav() {
             />
           </div>
           <div className="flex items-center gap-2 text-primary">
-            <button
-              className="p-2 hover:bg-[#2d3449]/50 transition-all duration-200 active:scale-95 rounded-sm"
-              aria-label="Notifications"
+            {user ? (
+              <>
+                <button
+                  className="p-2 hover:bg-[#2d3449]/50 transition-all duration-200 active:scale-95 rounded-sm"
+                  aria-label="Notifications"
+                >
+                  <span className="material-symbols-outlined">notifications</span>
+                </button>
+                <Link
+                  href="/profile"
+                  className="p-2 hover:bg-[#2d3449]/50 transition-all duration-200 active:scale-95 rounded-sm"
+                  aria-label="Account profile"
+                >
+                  <span className="material-symbols-outlined">account_circle</span>
+                </Link>
+                <Link
+                  href="/profile"
+                  className="hidden sm:block px-4 py-2 text-sm font-bold text-primary hover:bg-[#16243d] transition-all duration-200 rounded-sm"
+                >
+                  Profile
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth"
+                  className="hidden sm:block px-4 py-2 text-sm font-bold text-primary hover:bg-[#16243d] transition-all duration-200 rounded-sm"
+                >
+                  Login
+                </Link>
+              </>
+            )}
+            <Link
+              href={user ? "/pro" : "/auth"}
+              className="ml-2 bg-primary text-on-primary px-4 py-2 font-bold rounded-sm uppercase tracking-tighter hover:bg-white transition-colors active:scale-95"
             >
-              <span className="material-symbols-outlined">notifications</span>
-            </button>
-            <button
-              className="p-2 hover:bg-[#2d3449]/50 transition-all duration-200 active:scale-95 rounded-sm"
-              aria-label="Account"
-            >
-              <span className="material-symbols-outlined">account_circle</span>
-            </button>
-            <button className="hidden sm:block px-4 py-2 text-sm font-bold text-primary hover:bg-[#16243d] transition-all duration-200 rounded-sm">
-              Login
-            </button>
-            <button className="ml-2 bg-primary text-on-primary px-4 py-2 font-bold rounded-sm uppercase tracking-tighter hover:bg-white transition-colors active:scale-95">
               Get Alpha
-            </button>
+            </Link>
           </div>
           <button
             className="lg:hidden p-2 hover:bg-[#2d3449]/50 rounded-sm"
@@ -111,6 +150,24 @@ export default function TopNav() {
               </Link>
             );
           })}
+          {!user && (
+            <Link
+              href="/auth"
+              className="block py-2 text-secondary font-bold"
+              onClick={() => setMobileOpen(false)}
+            >
+              Login / Register
+            </Link>
+          )}
+          {user && (
+            <Link
+              href="/profile"
+              className="block py-2 text-primary font-bold"
+              onClick={() => setMobileOpen(false)}
+            >
+              Profile
+            </Link>
+          )}
         </nav>
       )}
     </header>
