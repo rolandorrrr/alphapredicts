@@ -1,34 +1,15 @@
 import type { Metadata } from "next";
 import JsonLd, { faqSchema } from "@/components/JsonLd";
 import CheckoutButton from "./CheckoutButton";
-import Link from "next/link";
+import StatusBanner from "./StatusBanner";
 
 export const metadata: Metadata = { title: "Pro", description: "Alpha Pro subscription — institutional intelligence for prediction market analysts." };
 
-export default async function ProPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ success?: string; canceled?: string }>;
-}) {
-  const params = await searchParams;
-  const success = params?.success === "true";
-  const canceled = params?.canceled === "true";
-
+export default function ProPage() {
   return (
     <div className="pt-24">
       <JsonLd data={faqSchema} />
-
-      {/* Success / Cancel banners */}
-      {success && (
-        <div className="bg-secondary/10 border-b border-secondary/30 text-secondary px-6 py-4 text-center font-bold uppercase tracking-widest text-sm">
-          Welcome to Alpha Pro. Your subscription is now active.
-        </div>
-      )}
-      {canceled && (
-        <div className="bg-error/10 border-b border-error/30 text-error px-6 py-4 text-center font-bold uppercase tracking-widest text-sm">
-          Checkout was canceled. You can try again anytime.
-        </div>
-      )}
+      <StatusBanner />
 
       {/* Hero */}
       <section className="relative px-6 py-20 max-w-[1440px] mx-auto overflow-hidden">
@@ -50,7 +31,7 @@ export default async function ProPage({
       </section>
 
       {/* Pricing */}
-      <section className="px-6 py-12 max-w-[1440px] mx-auto">
+      <section id="pricing" className="px-6 py-12 max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 mb-20">
           <div className="bg-surface-container-low p-12 border-l-4 border-primary/20 hover:border-primary transition-all duration-500 group">
             <div className="flex justify-between items-start mb-8">
@@ -149,7 +130,7 @@ export default async function ProPage({
             >
               Get Started Now
             </CheckoutButton>
-            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 300, behavior: "smooth" }); }} className="border-2 border-on-tertiary/20 px-10 py-5 font-black uppercase tracking-widest text-sm hover:bg-on-tertiary/10 transition-colors inline-flex items-center justify-center">
+            <a href="#pricing" className="border-2 border-on-tertiary/20 px-10 py-5 font-black uppercase tracking-widest text-sm hover:bg-on-tertiary/10 transition-colors inline-flex items-center justify-center">
               Compare Tiers
             </a>
           </div>
