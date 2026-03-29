@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Forum from "./Forum";
 
 export const metadata: Metadata = { title: "Community", description: "Connect with top-tier analysts, verify market sentiment, and participate in prediction streams." };
 
@@ -16,31 +17,9 @@ export default function CommunityPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* Forum */}
-        <section className="md:col-span-8 space-y-6">
-          <div className="flex justify-between items-end border-b border-outline-variant/15 pb-4">
-            <h2 className="text-xl font-bold tracking-tight text-primary uppercase">Hot Topics Forum</h2>
-            <span className="text-xs text-on-primary-container font-[var(--font-label)] tracking-widest">FILTER: RELEVANCE</span>
-          </div>
-          <div className="grid gap-4">
-            {[
-              { tag: "High Volatility", tagColor: "text-tertiary bg-tertiary/10", title: "The $ETH Q4 Breakout: Convergence or Liquidity Trap?", time: "2h ago", replies: "142 Replies", sentiment: "88% Bullish", sentimentColor: "text-secondary", sentimentIcon: "trending_up" },
-              { tag: "Macro Analysis", tagColor: "text-on-surface-variant bg-surface-variant", title: "Fed Pivot Strategy: Hedging against 2025 Interest Rate Adjustments", time: "5h ago", replies: "89 Replies", sentiment: "1.2k Views", sentimentColor: "text-on-primary-container", sentimentIcon: "visibility" },
-              { tag: "Alpha Signal", tagColor: "text-secondary bg-secondary/10", title: "Semi-conductor Supply Chain Predictive Modeling: Q3 Report Discussion", time: "12h ago", replies: "210 Replies", sentiment: "Pro Exclusive", sentimentColor: "text-tertiary", sentimentIcon: "star" },
-            ].map((f) => (
-              <div key={f.title} className="bg-surface-container-low p-6 group hover:bg-surface-container-high transition-all duration-300">
-                <div className="flex justify-between items-start mb-4">
-                  <span className={`text-[10px] font-bold tracking-[0.2em] uppercase px-2 py-1 ${f.tagColor}`}>{f.tag}</span>
-                  <span className="text-xs text-on-primary-container font-[var(--font-label)]">{f.time}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{f.title}</h3>
-                <div className="flex items-center space-x-6">
-                  <div className="flex items-center space-x-2"><span className="material-symbols-outlined text-sm text-on-primary-container">forum</span><span className="text-xs font-[var(--font-label)] text-on-primary-container">{f.replies}</span></div>
-                  <div className="flex items-center space-x-2"><span className={`material-symbols-outlined text-sm ${f.sentimentColor}`} style={f.sentimentIcon === "star" ? { fontVariationSettings: "'FILL' 1" } : undefined}>{f.sentimentIcon}</span><span className={`text-xs font-[var(--font-label)] ${f.sentimentColor}`}>{f.sentiment}</span></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <div className="md:col-span-8">
+          <Forum />
+        </div>
 
         {/* Sidebar */}
         <aside className="md:col-span-4 space-y-8">
