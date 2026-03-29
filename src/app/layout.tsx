@@ -38,6 +38,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AlphaPredicts | High-Stakes Logic",
   },
+  icons: {
+    icon: "/icon.svg",
+  },
   robots: {
     index: true,
     follow: true,

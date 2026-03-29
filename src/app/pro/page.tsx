@@ -30,6 +30,35 @@ export default function ProPage() {
         </div>
       </section>
 
+      {/* Free Trial CTA */}
+      <section className="px-6 py-16 max-w-[1440px] mx-auto">
+        <div className="bg-surface-container-highest border border-tertiary/30 p-12 text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-tertiary/5 via-transparent to-transparent pointer-events-none" />
+          <div className="relative z-10">
+            <div className="bg-secondary/10 text-secondary px-3 py-1 text-[10px] font-black uppercase tracking-widest mb-6 inline-block">
+              No commitment required
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4">
+              Try Alpha Pro Free for <span className="text-tertiary">7 Days</span>
+            </h2>
+            <p className="text-on-surface-variant max-w-xl mx-auto mb-8">
+              Full access to every signal, every analysis tool, and the complete Alpha Stack. Add a payment method to start your trial — cancel anytime before day 7 and you won&apos;t be charged.
+            </p>
+            <CheckoutButton
+              tier="tactical"
+              trial={true}
+              className="px-12 py-5 premium-gradient text-on-tertiary-fixed font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform inline-flex items-center gap-3"
+            >
+              <span className="material-symbols-outlined text-lg">rocket_launch</span>
+              Start 7-Day Free Trial
+            </CheckoutButton>
+            <p className="text-[10px] text-on-surface-variant mt-4 uppercase tracking-widest">
+              $149/mo after trial &bull; Cancel anytime &bull; Payment method required
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section id="pricing" className="px-6 py-12 max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 mb-20">
@@ -81,7 +110,6 @@ export default function ProPage() {
             </div>
             {[
               { icon: "groups", color: "text-primary", t: "Private Discord", d: "Direct access to our lead analysts and a high-signal community of whales." },
-              { icon: "terminal", color: "text-primary", t: "API Access", d: "Bridge our predictive models directly into your custom trading bots." },
               { icon: "podcasts", color: "text-primary", t: "Webinars", d: "Weekly deep-dives into macro trends and micro-structure analysis." },
               { icon: "query_stats", color: "text-secondary", t: "Alpha Ledger", d: "Our full historical signal performance, verified on-chain." },
             ].map((f) => (
@@ -103,13 +131,13 @@ export default function ProPage() {
           </div>
           <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { q: "The predictive model for high-cap rotations is the most accurate I've seen in 12 years of trading. Alpha Pro paid for itself in the first 48 hours.", name: "Marcus V.", role: "Hedge Fund Manager", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuB4ms6tBcrfItAF2i-sU5rOlK7PwbMqIRHSeJWV9JUgktFBTD_pHGcFnrbyI5tgxMjg5vJNme9TQB6usNPGBES0nrhncgvG-4fz7Tu89jv6jY9wsQTyLpHPRGIxxk9muP63G_M-77xeKNq8m-ek6JZMe5mu2l1W0a3sP7a5-GoYiCkke_OUlshEY4bKQH8WZ5dzTeWHK1G80ZuGCIP43ry-iJLup7TZR3ry_By0b0KvChe7bCV_U4T5Mh2gttCSKg1tbmiNVDftmCA" },
-              { q: "The API documentation is pristine. Integrating Alpha signals into our proprietary execution engine was seamless and immediate.", name: "Elena R.", role: "Quant Strategist", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuD-MEdMznALOzN8pGvM4CRNlCX3joiuaboEHhcCh3mi_Ep4eVgZIjTWFg9Bqj6aIJg433YaumFdBPyYjkPYJ3BNm94SIxUCv9DxZq7pZLrQsJZhIgJ8cA2eOAtMCdKkdXZ0FJSieLif9fUTlfdLXva_NMcXJ_DsdO4v9FRish_1UYBj4tKLoMK8Olo81Zsl0oQ53NXf5CFgKAgnezF_EJGmMqHPFMqYQ0T0i8o--h8TfKj6gtkvrQIk44MuuJFvU6ACa7YiO_XDprg" },
+              { q: "Alpha Pro called the French election unwind 36 hours before Polymarket moved. I was positioned before the crowd even woke up. This is the only edge I trust.", name: "Daniel K.", role: "Polymarket Top 50 Trader", initials: "DK" },
+              { q: "I was bleeding on Kalshi event contracts until I found AlphaPredicts. Their signal correlation model flipped my P&L in the first week. The conviction data is unmatched.", name: "Priya S.", role: "Kalshi Event Strategist", initials: "PS" },
             ].map((t) => (
               <div key={t.name} className="space-y-6">
                 <div className="text-lg leading-relaxed font-medium italic text-on-surface">&ldquo;{t.q}&rdquo;</div>
                 <div className="flex items-center gap-4">
-                  <img className="w-12 h-12 rounded-sm grayscale" alt={t.name} src={t.img} />
+                  <div className="w-12 h-12 rounded-sm bg-surface-container-highest flex items-center justify-center text-tertiary font-black text-sm">{t.initials}</div>
                   <div><div className="text-sm font-bold uppercase tracking-widest">{t.name}</div><div className="text-[10px] text-tertiary uppercase tracking-widest">{t.role}</div></div>
                 </div>
               </div>

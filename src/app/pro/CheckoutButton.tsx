@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 
 export default function CheckoutButton({
   tier,
+  trial = false,
   className,
   children,
 }: {
   tier: "tactical" | "sovereign";
+  trial?: boolean;
   className: string;
   children: React.ReactNode;
 }) {
@@ -31,7 +33,7 @@ export default function CheckoutButton({
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tier }),
+        body: JSON.stringify({ tier, trial }),
       });
 
       const data = await res.json();

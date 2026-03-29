@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 export async function POST(request: Request) {
   try {
-    const { tier } = await request.json();
+    const { tier, trial } = await request.json();
 
     if (!tier || !(tier in PLANS)) {
       return NextResponse.json({ error: "Invalid tier" }, { status: 400 });
@@ -45,7 +45,8 @@ export async function POST(request: Request) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
     // Create Stripe Checkout Session
-    const session = await stripe.checkout.sessions.create({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sessionConfig: any = {
       mode: "subscription",
       payment_method_types: ["card"],
       customer_email: user.email,
@@ -68,10 +69,22 @@ export async function POST(request: Request) {
       metadata: {
         user_id: user.id,
         tier: tier,
+        trial: trial ? "true" : "false",
       },
       success_url: `${siteUrl}/pro?success=true`,
       cancel_url: `${siteUrl}/pro?canceled=true`,
-    });
+    };
+
+    // Add 7-day free trial if requested
+    if (trial) {
+      sessionConfig.subscription_data = {
+        trial_period_days: 7,
+      };
+      // Payment method is still collected by default in subscription mode
+      sessionConfig.payment_method_collection = "always";
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     return NextResponse.json({ url: session.url });
   } catch (err: unknown) {

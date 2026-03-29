@@ -46,22 +46,6 @@ export default function Footer() {
                 Signal Archive
               </Link>
             </li>
-            <li>
-              <Link
-                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
-                href="/analysis"
-              >
-                Editorial Board
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
-                href="#"
-              >
-                API Documentation
-              </Link>
-            </li>
           </ul>
         </div>
         <div>
@@ -111,7 +95,7 @@ export default function Footer() {
             <li>
               <Link
                 className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
-                href="#"
+                href="/legal#privacy-policy"
               >
                 Privacy Policy
               </Link>
@@ -119,7 +103,7 @@ export default function Footer() {
             <li>
               <Link
                 className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
-                href="#"
+                href="/legal#risk-disclosure"
               >
                 Risk Disclosure
               </Link>
@@ -127,9 +111,25 @@ export default function Footer() {
             <li>
               <Link
                 className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
-                href="#"
+                href="/legal#terms-of-service"
               >
                 Terms of Service
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                href="/legal#electronic-communications"
+              >
+                Electronic Communications Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
+                href="/legal#electronic-signature"
+              >
+                Consent to Electronic Signature
               </Link>
             </li>
             <li>

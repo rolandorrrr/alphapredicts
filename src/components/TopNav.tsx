@@ -71,11 +71,11 @@ export default function TopNav() {
         </div>
         <div className="flex items-center gap-4">
           <div className="relative hidden lg:block">
-            <label htmlFor="search-input" className="sr-only">Search assets</label>
+            <label htmlFor="search-input" className="sr-only">Search markets</label>
             <input
               id="search-input"
               className="bg-surface-container-lowest border-none text-xs tracking-widest px-4 py-2 w-64 focus:ring-1 focus:ring-secondary text-on-surface"
-              placeholder="SEARCH ASSETS..."
+              placeholder="SEARCH MARKETS..."
               type="text"
             />
           </div>
