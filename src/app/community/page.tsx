@@ -45,7 +45,7 @@ export default function CommunityPage() {
         {/* Sidebar */}
         <aside className="md:col-span-4 space-y-8">
           <div className="bg-surface-container p-6 border border-outline-variant/10">
-            <h2 className="text-sm font-bold tracking-widest text-on-primary-container uppercase mb-6 flex items-center justify-between">Top Analysts<span className="material-symbols-outlined text-tertiary text-lg">military_tech</span></h2>
+            <h2 className="text-sm font-bold tracking-widest text-on-primary-container uppercase mb-6 flex items-center justify-between"><a href="/community/members" className="hover:text-primary transition-colors">Top Analysts</a><a href="/community/members"><span className="material-symbols-outlined text-tertiary text-lg hover:scale-110 transition-transform">military_tech</span></a></h2>
             <div className="space-y-4">
               {[
                 { rank: "01", name: "@Matrix_Quant", acc: "94.2%", pct: 94, color: "text-tertiary" },

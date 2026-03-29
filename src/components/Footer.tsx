@@ -64,7 +64,7 @@ export default function Footer() {
             <li>
               <Link
                 className="text-slate-400 hover:text-primary hover:underline decoration-tertiary transition-opacity duration-300"
-                href="/community"
+                href="/community/members"
               >
                 Member Directory
               </Link>
