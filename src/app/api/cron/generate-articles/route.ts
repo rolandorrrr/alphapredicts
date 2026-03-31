@@ -61,7 +61,16 @@ export async function GET(request: Request) {
       .map((r) => (r as PromiseFulfilledResult<NonNullable<Awaited<ReturnType<typeof generateArticle>>>>).value);
 
     if (articles.length === 0) {
-      return NextResponse.json({ error: "Failed to generate any articles" }, { status: 500 });
+      return NextResponse.json({
+        error: "Failed to generate any articles",
+        debug: {
+          marketsFound: { sports: grouped.sports.length, genz: grouped.genz.length, finance: grouped.finance.length },
+          geminiKeySet: !!process.env.GEMINI_API_KEY,
+          marcusResult: marcusArticle.status === "rejected" ? marcusArticle.reason?.message : (marcusArticle.value === null ? "null result" : "ok"),
+          zaraResult: zaraArticle.status === "rejected" ? zaraArticle.reason?.message : (zaraArticle.value === null ? "null result" : "ok"),
+          vanceResult: vanceArticle.status === "rejected" ? vanceArticle.reason?.message : (vanceArticle.value === null ? "null result" : "ok"),
+        },
+      }, { status: 500 });
     }
 
     // Insert articles (first one is featured)
