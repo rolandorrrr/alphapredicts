@@ -30,20 +30,25 @@ export async function GET(request: Request) {
       { cookies: { getAll: () => [], setAll: () => {} } }
     );
 
-    // Check if we already generated today
+    // Check if we already generated today (skip with ?force=true)
+    const { searchParams } = new URL(request.url);
+    const force = searchParams.get("force") === "true";
     const today = new Date().toISOString().split("T")[0];
-    const { data: existing } = await supabase
-      .from("articles")
-      .select("id")
-      .gte("published_at", `${today}T00:00:00Z`)
-      .lte("published_at", `${today}T23:59:59Z`)
-      .limit(1);
 
-    if (existing && existing.length > 0) {
-      return NextResponse.json({
-        message: "Articles already generated today",
-        date: today,
-      });
+    if (!force) {
+      const { data: existing } = await supabase
+        .from("articles")
+        .select("id")
+        .gte("published_at", `${today}T00:00:00Z`)
+        .lte("published_at", `${today}T23:59:59Z`)
+        .limit(1);
+
+      if (existing && existing.length > 0) {
+        return NextResponse.json({
+          message: "Articles already generated today",
+          date: today,
+        });
+      }
     }
 
     // Fetch market data
