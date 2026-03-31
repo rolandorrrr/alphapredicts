@@ -112,7 +112,8 @@ IMPORTANT: Respond ONLY with valid JSON in exactly this format, no markdown code
       published_at: new Date().toISOString(),
     };
   } catch (err) {
-    console.error(`Failed to generate article for ${persona.name}:`, err);
-    return null;
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error(`Failed to generate article for ${persona.name}:`, msg);
+    throw new Error(`${persona.name}: ${msg}`);
   }
 }
