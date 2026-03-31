@@ -84,7 +84,24 @@ IMPORTANT: Respond ONLY with valid JSON in exactly this format, no markdown code
 }`;
 
   try {
-    const result = await model.generateContent(prompt);
+    // Retry up to 3 times with exponential backoff for rate limits
+    let result;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        result = await model.generateContent(prompt);
+        break;
+      } catch (retryErr: unknown) {
+        const msg = retryErr instanceof Error ? retryErr.message : String(retryErr);
+        if (msg.includes("429") && attempt < 2) {
+          const delay = (attempt + 1) * 20000; // 20s, 40s
+          console.log(`Rate limited for ${persona.name}, retrying in ${delay/1000}s (attempt ${attempt + 1}/3)`);
+          await new Promise((r) => setTimeout(r, delay));
+          continue;
+        }
+        throw retryErr;
+      }
+    }
+    if (!result) throw new Error("Failed after 3 retries");
     const text = result.response.text().trim();
 
     // Extract JSON — handle potential markdown code fences

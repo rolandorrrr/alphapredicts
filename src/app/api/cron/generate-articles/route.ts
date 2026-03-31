@@ -49,16 +49,25 @@ export async function GET(request: Request) {
     // Fetch market data
     const { grouped } = await fetchAllMarkets();
 
-    // Generate articles for each persona in parallel
-    const [marcusArticle, zaraArticle, vanceArticle] = await Promise.allSettled([
-      generateArticle(PERSONAS.marcus, grouped.sports.length > 0 ? grouped.sports : grouped.finance.slice(0, 2)),
-      generateArticle(PERSONAS.zara, grouped.genz.length > 0 ? grouped.genz : grouped.finance.slice(0, 2)),
-      generateArticle(PERSONAS.vance, grouped.finance.length > 0 ? grouped.finance : grouped.sports.slice(0, 2)),
-    ]);
+    // Generate articles sequentially to avoid rate limits
+    const personaConfigs = [
+      { persona: PERSONAS.marcus, markets: grouped.sports.length > 0 ? grouped.sports : grouped.finance.slice(0, 2) },
+      { persona: PERSONAS.zara, markets: grouped.genz.length > 0 ? grouped.genz : grouped.finance.slice(0, 2) },
+      { persona: PERSONAS.vance, markets: grouped.finance.length > 0 ? grouped.finance : grouped.sports.slice(0, 2) },
+    ];
 
-    const articles = [marcusArticle, zaraArticle, vanceArticle]
-      .filter((r) => r.status === "fulfilled" && r.value !== null)
-      .map((r) => (r as PromiseFulfilledResult<NonNullable<Awaited<ReturnType<typeof generateArticle>>>>).value);
+    const articles = [];
+    const errors: string[] = [];
+    for (const config of personaConfigs) {
+      try {
+        const article = await generateArticle(config.persona, config.markets);
+        if (article) articles.push(article);
+        // Brief pause between requests
+        await new Promise((r) => setTimeout(r, 5000));
+      } catch (err) {
+        errors.push(String(err));
+      }
+    }
 
     if (articles.length === 0) {
       return NextResponse.json({
@@ -66,9 +75,7 @@ export async function GET(request: Request) {
         debug: {
           marketsFound: { sports: grouped.sports.length, genz: grouped.genz.length, finance: grouped.finance.length },
           geminiKeySet: !!process.env.GEMINI_API_KEY,
-          marcusResult: marcusArticle.status === "rejected" ? String(marcusArticle.reason) : (marcusArticle.value === null ? "null result" : "ok"),
-          zaraResult: zaraArticle.status === "rejected" ? String(zaraArticle.reason) : (zaraArticle.value === null ? "null result" : "ok"),
-          vanceResult: vanceArticle.status === "rejected" ? String(vanceArticle.reason) : (vanceArticle.value === null ? "null result" : "ok"),
+          errors,
         },
       }, { status: 500 });
     }
