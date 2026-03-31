@@ -7,11 +7,15 @@ import { PERSONAS } from "@/lib/ai/personas";
 export const maxDuration = 300;
 
 export async function GET(request: Request) {
-  // Verify authorization
+  // Verify authorization — Vercel crons send this automatically
   const authHeader = request.headers.get("authorization");
   const cronSecret = process.env.CRON_SECRET;
 
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  // Allow Vercel cron (no auth header) or manual trigger with Bearer token
+  const isVercelCron = request.headers.get("x-vercel-cron") === "true" || request.headers.get("user-agent")?.includes("vercel-cron");
+  const isManualTrigger = cronSecret && authHeader === `Bearer ${cronSecret}`;
+
+  if (cronSecret && !isVercelCron && !isManualTrigger) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
