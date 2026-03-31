@@ -22,5 +22,11 @@
   ],
   "redirects": [
     { "source": "/home", "destination": "/", "permanent": true }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/generate-articles",
+      "schedule": "0 10 * * *"
+    }
   ]
 }
