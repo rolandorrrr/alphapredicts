@@ -3,11 +3,25 @@ import type { PoliticsMarket } from "../markets/polymarket-politics";
 export function formatValueSignal(markets: PoliticsMarket[]): string {
   if (markets.length === 0) return "";
 
-  // Find undervalued markets: high volume + significant price movement
-  const undervalued = markets
-    .filter((m) => m.volume24h > 1000 && m.yesProbability > 0.05 && m.yesProbability < 0.95)
+  // Primary: meaningful volume + meaningful price movement
+  let undervalued = markets
+    .filter(
+      (m) =>
+        m.volume24h > 500 &&
+        m.yesProbability > 0.05 &&
+        m.yesProbability < 0.95 &&
+        Math.abs(m.priceChange24h) > 0.5
+    )
     .sort((a, b) => Math.abs(b.priceChange24h) - Math.abs(a.priceChange24h))
     .slice(0, 4);
+
+  // Fallback: if no movers, just pick the top 3 by volume
+  if (undervalued.length === 0) {
+    undervalued = markets
+      .filter((m) => m.yesProbability > 0.05 && m.yesProbability < 0.95)
+      .sort((a, b) => b.volume24h - a.volume24h)
+      .slice(0, 3);
+  }
 
   if (undervalued.length === 0) return "";
 
